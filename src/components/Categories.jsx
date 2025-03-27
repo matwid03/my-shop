@@ -3,7 +3,6 @@ import { products } from '../const/products';
 
 export function Categories() {
 	const categories = [...new Set(products.map((product) => product.category))];
-	console.log(categories);
 
 	return (
 		<nav className='flex justify-start items-center gap-2 bg-gray-300 p-4 text-gray-600'>

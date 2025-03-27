@@ -5,36 +5,29 @@ import { Categories } from './components/Categories';
 import { FiltersSidebar } from './components/FiltersSidebar';
 import { CartPage } from './pages/CartPage';
 import { FavouritesPage } from './pages/FavouritesPage';
-import { useState } from 'react';
 import { products } from './const/products';
+import { FiltersProvider } from './context/FiltersContext';
 
 function App() {
 	const location = useLocation();
-	const isHomePage = location.pathname === '/';
-	const [selectedFilters, setSelectedFilters] = useState({
-		brands: [],
-		price: Math.max(...products.map((p) => p.price)),
-	});
+	const isHomePage = location.pathname === '/' || location.pathname.startsWith('/mice') || location.pathname.startsWith('/keyboards') || location.pathname.startsWith('/headphones') || location.pathname.startsWith('/laptops');
 
 	return (
 		<>
 			<Navbar />
 			{isHomePage ? (
-				<>
+				<FiltersProvider>
 					<Categories />
 					<div className='flex'>
-						<FiltersSidebar className='w-1/4' selectedFilters={selectedFilters} setSelectedFilters={setSelectedFilters} products={products} />
+						<FiltersSidebar className='w-1/4' products={products} />
 						<div className='w-3/4'>
 							<Routes>
-								<Route path='/' element={<HomePage selectedFilters={selectedFilters} />} />
-								<Route path='/mice' element={<HomePage selectedFilters={selectedFilters} />} />
-								<Route path='/keyboards' element={<HomePage selectedFilters={selectedFilters} />} />
-								<Route path='/headphones' element={<HomePage selectedFilters={selectedFilters} />} />
-								<Route path='/laptops' element={<HomePage selectedFilters={selectedFilters} />} />
+								<Route path='/' element={<HomePage />} />
+								<Route path='/:category' element={<HomePage />} />
 							</Routes>
 						</div>
 					</div>
-				</>
+				</FiltersProvider>
 			) : (
 				<Routes>
 					<Route path='/cart' element={<CartPage />} />

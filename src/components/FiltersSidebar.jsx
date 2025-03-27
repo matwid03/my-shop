@@ -1,8 +1,11 @@
-export function FiltersSidebar({ selectedFilters, setSelectedFilters, products }) {
+import { FiltersProvider } from '../context/FiltersContext';
+
+export function FiltersSidebar({ products }) {
+	const { selectedFilters, setSelectedFilters } = FiltersProvider.useFilters();
+
 	const brands = [...new Set(products.map((p) => p.brand))];
 
 	const maxPrice = Math.max(...products.map((p) => p.price));
-	///cena apple
 	const handleFilterChange = (type, value) => {
 		setSelectedFilters((prevFilters) => {
 			const updatedFilters = { ...prevFilters };
@@ -34,7 +37,7 @@ export function FiltersSidebar({ selectedFilters, setSelectedFilters, products }
 
 			<div className='mt-4'>
 				<h2 className='text-lg font-bold mb-2'>Cena</h2>
-				<input type='range' min={0} max={maxPrice} value={selectedFilters.price} onChange={handlePriceChange} className='w-full cursor-pointer' />
+				<input type='range' min={0} max={maxPrice + 1} value={selectedFilters.price} onChange={handlePriceChange} className='w-full cursor-pointer' />
 				<p className='text-center'>Maksymalna cena: {selectedFilters.price} zł</p>
 			</div>
 		</aside>
