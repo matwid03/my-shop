@@ -7,6 +7,7 @@ import { CartPage } from './pages/CartPage';
 import { FavouritesPage } from './pages/FavouritesPage';
 import { products } from './const/products';
 import { FiltersProvider } from './context/FiltersContext';
+import { AuthPage } from './pages/AuthPage';
 
 function App() {
 	const location = useLocation();
@@ -30,6 +31,7 @@ function App() {
 				</FiltersProvider>
 			) : (
 				<Routes>
+					<Route path='/auth' element={<AuthPage />} />
 					<Route path='/cart' element={<CartPage />} />
 					<Route path='/favourites' element={<FavouritesPage />} />
 				</Routes>
