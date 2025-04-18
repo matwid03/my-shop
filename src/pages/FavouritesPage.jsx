@@ -1,36 +1,36 @@
 import { TrashIcon } from '@heroicons/react/24/outline';
+import { products } from '../const/products';
+import { removeFromFavourites } from '../utils/favourites';
+import { useEffect, useState } from 'react';
+import { AuthProvider } from '../context/AuthContext';
 
 export function FavouritesPage() {
-	const favouriteProducts = [
-		{
-			id: 18,
-			name: 'Asus ROG Zephyrus G14',
-			category: 'laptops',
-			brand: 'Asus',
-			price: 7299.99,
-			image: 'laptop3.jpg',
-		},
-		{
-			id: 15,
-			name: 'Logitech G Pro X Wireless',
-			category: 'headphones',
-			brand: 'Logitech',
-			price: 799.99,
-			image: 'headphones5.jpg',
-		},
-		{
-			id: 12,
-			name: 'SteelSeries Arctis 7',
-			category: 'headphones',
-			brand: 'SteelSeries',
-			price: 599.99,
-			image: 'headphones2.jpg',
-		},
-	];
+	const { user, setUser, isLoading } = AuthProvider.useAuth();
+	const [favouriteProducts, setFavouriteProducts] = useState([]);
 
+	useEffect(() => {
+		if (user) {
+			const productIds = user?.favourites || [];
+			const favs = products.filter((product) => productIds.includes(product.id));
+			setFavouriteProducts(favs);
+		}
+	}, [user]);
+
+	const handleRemove = async (productId) => {
+		setFavouriteProducts((prev) => prev.filter((product) => product.id !== productId));
+		await removeFromFavourites(user.uid, productId, setUser);
+	};
+
+	if (isLoading) {
+		return <div className='p-4 text-center text-gray-600 font-bold'>Ładowanie ulubionych produktów...</div>;
+	}
+
+	if (!user) {
+		return <div className='p-4 text-center text-gray-600 font-bold'>Zaloguj się, aby zobaczyć ulubione produkty.</div>;
+	}
 	return (
 		<div className='p-4'>
-			<h1 className='text-2xl font-bold mb-4'>Ulubione produkty</h1>
+			<h1 className='text-3xl font-bold mb-4'>Ulubione produkty</h1>
 			{favouriteProducts.length === 0 ? (
 				<p>Brak ulubionych produktów.</p>
 			) : (
@@ -44,7 +44,7 @@ export function FavouritesPage() {
 									<p className='text-gray-700'>{product.price} zł</p>
 								</div>
 							</div>
-							<button className='text-red-500 cursor-pointer hover:text-red-700'>
+							<button onClick={() => handleRemove(product.id)} className='text-red-500 cursor-pointer hover:text-red-700'>
 								<TrashIcon className='w-6 h-6' />
 							</button>
 						</li>

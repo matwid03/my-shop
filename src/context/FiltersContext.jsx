@@ -7,9 +7,17 @@ export function FiltersProvider({ children }) {
 	const [selectedFilters, setSelectedFilters] = useState({
 		brands: [],
 		price: Math.max(...products.map((p) => p.price)),
+		searchQuery: '',
 	});
 
-	return <FiltersContext.Provider value={{ selectedFilters, setSelectedFilters }}>{children}</FiltersContext.Provider>;
+	const updateSearchQuery = (query) => {
+		setSelectedFilters((prev) => ({
+			...prev,
+			searchQuery: query,
+		}));
+	};
+
+	return <FiltersContext.Provider value={{ selectedFilters, setSelectedFilters, updateSearchQuery }}>{children}</FiltersContext.Provider>;
 }
 
 FiltersProvider.useFilters = function () {

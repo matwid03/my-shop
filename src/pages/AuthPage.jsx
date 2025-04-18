@@ -23,10 +23,19 @@ export function AuthPage() {
 		e.preventDefault();
 
 		if (isLogin) {
-			await signInWithEmailAndPassword(FIREBASE_AUTH, email, password);
-			navigate('/');
+			try {
+				await signInWithEmailAndPassword(FIREBASE_AUTH, email, password);
+				navigate('/');
+			} catch (error) {
+				console.error(error);
+				if (error.code === 'auth/invalid-credential') {
+					setErrorMessage('Niepoprawny login lub hasło!');
+				}
+			}
 		} else {
 			try {
+				localStorage.setItem('isRegistering', 'true');
+
 				const userCredentials = await createUserWithEmailAndPassword(FIREBASE_AUTH, email, password);
 				const user = userCredentials.user;
 
@@ -39,12 +48,10 @@ export function AuthPage() {
 				});
 
 				await FIREBASE_AUTH.signOut();
+				localStorage.removeItem('isRegistering');
 
-				setEmail('');
-				setPassword('');
-				setUsername('');
+				clearForm();
 				setIsLogin(true);
-				setErrorMessage('');
 
 				alert('Konto zostało utworzone. Zaloguj się.');
 			} catch (error) {

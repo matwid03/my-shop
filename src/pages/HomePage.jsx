@@ -11,7 +11,9 @@ export function HomePage() {
 		const matchesCategory = !category || product.category.toLowerCase() === category;
 		const matchesBrand = selectedFilters.brands.length === 0 || selectedFilters.brands.includes(product.brand);
 		const matchesPrice = product.price <= selectedFilters.price;
-		return matchesCategory & matchesBrand && matchesPrice;
+		const matchesSearch = selectedFilters.searchQuery.trim() === '' || product.name.toLowerCase().includes(selectedFilters.searchQuery.toLowerCase());
+
+		return matchesCategory & matchesBrand && matchesPrice && matchesSearch;
 	});
 
 	return (

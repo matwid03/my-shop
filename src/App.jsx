@@ -14,10 +14,10 @@ function App() {
 	const isHomePage = location.pathname === '/' || location.pathname.startsWith('/mice') || location.pathname.startsWith('/keyboards') || location.pathname.startsWith('/headphones') || location.pathname.startsWith('/laptops');
 
 	return (
-		<>
+		<FiltersProvider>
 			<Navbar />
 			{isHomePage ? (
-				<FiltersProvider>
+				<>
 					<Categories />
 					<div className='flex'>
 						<FiltersSidebar className='w-1/4' products={products} />
@@ -28,7 +28,7 @@ function App() {
 							</Routes>
 						</div>
 					</div>
-				</FiltersProvider>
+				</>
 			) : (
 				<Routes>
 					<Route path='/auth' element={<AuthPage />} />
@@ -36,7 +36,7 @@ function App() {
 					<Route path='/favourites' element={<FavouritesPage />} />
 				</Routes>
 			)}
-		</>
+		</FiltersProvider>
 	);
 }
 
