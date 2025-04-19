@@ -27,6 +27,10 @@ export function CartPage() {
 		await removeFromCart(user.uid, productId, setUser);
 	};
 
+	if (!user) {
+		return <div className='p-4 text-center text-gray-600 font-bold'>Zaloguj się, aby dodać produkty do koszyka.</div>;
+	}
+
 	return (
 		<div className='p-6'>
 			<h1 className='text-3xl font-bold mb-6'>🛒 Twój koszyk</h1>
