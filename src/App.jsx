@@ -8,6 +8,7 @@ import { FavouritesPage } from './pages/FavouritesPage';
 import { products } from './const/products';
 import { FiltersProvider } from './context/FiltersContext';
 import { AuthPage } from './pages/AuthPage';
+import { ProductPage } from './pages/ProductPage';
 
 function App() {
 	const location = useLocation();
@@ -32,6 +33,7 @@ function App() {
 			) : (
 				<Routes>
 					<Route path='/auth' element={<AuthPage />} />
+					<Route path='/product/:id' element={<ProductPage />} />
 					<Route path='/cart' element={<CartPage />} />
 					<Route path='/favourites' element={<FavouritesPage />} />
 				</Routes>

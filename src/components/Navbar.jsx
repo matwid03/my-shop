@@ -9,14 +9,15 @@ import { AuthProvider } from '../context/AuthContext';
 export function Navbar() {
 	const { user } = AuthProvider.useAuth();
 	const [showMenu, setShowMenu] = useState(false);
-	const [favNumber, setFavNumber] = useState(user?.favourites?.length);
+	const [favNumber, setFavNumber] = useState(user?.favourites?.length || 0);
 	const { selectedFilters, updateSearchQuery } = FiltersProvider.useFilters();
-
 	const navigate = useNavigate();
-	//ogarnac ten numer
+
 	useEffect(() => {
 		if (user) {
 			setFavNumber(user?.favourites?.length);
+		}else{
+			setFavNumber(0)
 		}
 		const close = (e) => {
 			if (!e.target.closest('.menu-wrapper')) setShowMenu(false);
