@@ -10,14 +10,17 @@ export function Navbar() {
 	const { user } = AuthProvider.useAuth();
 	const [showMenu, setShowMenu] = useState(false);
 	const [favNumber, setFavNumber] = useState(user?.favourites?.length || 0);
+	const [cartNumber, setCartNumber] = useState(user?.cart?.length || 0);
 	const { selectedFilters, updateSearchQuery } = FiltersProvider.useFilters();
 	const navigate = useNavigate();
 
 	useEffect(() => {
 		if (user) {
 			setFavNumber(user?.favourites?.length);
-		}else{
-			setFavNumber(0)
+			setCartNumber(user?.cart?.length);
+		} else {
+			setFavNumber(0);
+			setCartNumber(0);
 		}
 		const close = (e) => {
 			if (!e.target.closest('.menu-wrapper')) setShowMenu(false);
@@ -74,8 +77,9 @@ export function Navbar() {
 					<HeartIcon className='w-10 h-10 hover:text-gray-950 ' />
 					<span className='absolute right-0 top-6  bg-red-500 text-white text-sm w-5 h-5 flex justify-center rounded-full'>{favNumber}</span>
 				</Link>
-				<Link to='/cart'>
+				<Link to='/cart' className='relative'>
 					<ShoppingBagIcon className='w-10 h-10 hover:text-gray-950 ' />
+					<span className='absolute right-0 top-6  bg-black text-white text-sm w-5 h-5 flex justify-center rounded-full'>{cartNumber}</span>
 				</Link>
 			</div>
 		</nav>

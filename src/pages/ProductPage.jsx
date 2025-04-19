@@ -1,15 +1,27 @@
 import { Link, useParams } from 'react-router-dom';
 import { products } from '../const/products';
+import { addToCart } from '../utils/cart';
+import { AuthProvider } from '../context/AuthContext';
 
 export function ProductPage() {
+	const { user, setUser } = AuthProvider.useAuth();
 	const { id } = useParams();
 	const product = products.find((p) => p.id === Number(id));
+
+	const similarProducts = products.filter((p) => p.category === product.category && p.id !== product.id).slice(0, 4);
+
+	const handleBtnClick = async () => {
+		if (!user) {
+			alert('Zaloguj się, aby dodać do ulubionych!');
+			return;
+		}
+
+		await addToCart(user.uid, product.id, setUser);
+	};
 
 	if (!product) {
 		return <div className='text-center mt-10 text-red-500 font-bold'>Nie znaleziono produktu.</div>;
 	}
-
-	const similarProducts = products.filter((p) => p.category === product.category && p.id !== product.id).slice(0, 4);
 
 	return (
 		<div className='max-w-5xl mx-auto p-6'>
@@ -24,7 +36,9 @@ export function ProductPage() {
 					</div>
 					<div>
 						<p className='text-2xl text-green-700 font-bold mb-6'>{product.price}zł</p>
-						<button className='bg-black text-white p-4 rounded-2xl cursor-pointer hover:bg-gray-800 transition '>Dodaj do koszyka</button>
+						<button className='bg-black text-white p-4 rounded-2xl cursor-pointer hover:bg-gray-800 transition ' onClick={handleBtnClick}>
+							Dodaj do koszyka
+						</button>
 					</div>
 				</div>
 			</div>

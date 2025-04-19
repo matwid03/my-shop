@@ -1,38 +1,31 @@
 import { TrashIcon } from '@heroicons/react/24/outline';
+import { AuthProvider } from '../context/AuthContext';
+import { useEffect, useState } from 'react';
+import { products } from '../const/products';
+import { removeFromCart } from '../utils/cart';
 
 export function CartPage() {
-	const cartProducts = [
-		{
-			id: 18,
-			name: 'Asus ROG Zephyrus G14',
-			category: 'laptops',
-			brand: 'Asus',
-			price: 7299.99,
-			image: 'laptop3.jpg',
-		},
-		{
-			id: 15,
-			name: 'Logitech G Pro X Wireless',
-			category: 'headphones',
-			brand: 'Logitech',
-			price: 799.99,
-			image: 'headphones5.jpg',
-		},
-		{
-			id: 12,
-			name: 'SteelSeries Arctis 7',
-			category: 'headphones',
-			brand: 'SteelSeries',
-			price: 599.99,
-			image: 'headphones2.jpg',
-		},
-	];
+	const { user, setUser } = AuthProvider.useAuth();
+	const [cartProducts, setCartProducts] = useState([]);
+
+	useEffect(() => {
+		if (user) {
+			const productIds = user?.cart || [];
+			const items = products.filter((product) => productIds.includes(product.id));
+			setCartProducts(items);
+		}
+	}, [user]);
 
 	const productsPrice = cartProducts.reduce((total, product) => total + product.price, 0);
 	const deliveryCost = 59;
 	const minSumForFreeDelivery = 1000;
 	const isFreeDelivery = productsPrice >= minSumForFreeDelivery;
 	const totalPrice = isFreeDelivery ? productsPrice : productsPrice + deliveryCost;
+
+	const handleBtnClick = async (productId) => {
+		setCartProducts((prev) => prev.filter((product) => product.id !== productId));
+		await removeFromCart(user.uid, productId, setUser);
+	};
 
 	return (
 		<div className='p-6'>
@@ -52,7 +45,7 @@ export function CartPage() {
 										<p className='text-gray-700'>{product.price.toFixed(2)} zł</p>
 									</div>
 								</div>
-								<button className='text-red-500 cursor-pointer hover:text-red-700 transition'>
+								<button className='text-red-500 cursor-pointer hover:text-red-700 transition' onClick={() => handleBtnClick(product.id)}>
 									<TrashIcon className='w-6 h-6' />
 								</button>
 							</li>

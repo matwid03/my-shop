@@ -3,6 +3,7 @@ import { products } from '../const/products';
 import { removeFromFavourites } from '../utils/favourites';
 import { useEffect, useState } from 'react';
 import { AuthProvider } from '../context/AuthContext';
+import { Link } from 'react-router-dom';
 
 export function FavouritesPage() {
 	const { user, setUser, isLoading } = AuthProvider.useAuth();
@@ -37,13 +38,16 @@ export function FavouritesPage() {
 				<ul className='space-y-4'>
 					{favouriteProducts.map((product) => (
 						<li key={product.id} className='flex items-center justify-between p-4 border rounded-lg shadow-md hover:shadow-lg'>
-							<div className='flex items-center gap-4 cursor-pointer'>
-								<img src={product.image} alt={product.name} className='w-16 h-16 object-contain' />
-								<div>
-									<h2 className='text-lg font-semibold'>{product.name}</h2>
-									<p className='text-gray-700'>{product.price} zł</p>
+							<Link to={`/product/${product.id}`}>
+								<div className='flex items-center gap-4 cursor-pointer'>
+									<img src={product.image} alt={product.name} className='w-16 h-16 object-contain' />
+									<div>
+										<h2 className='text-lg font-semibold'>{product.name}</h2>
+										<p className='text-gray-700'>{product.price} zł</p>
+									</div>
 								</div>
-							</div>
+							</Link>
+
 							<button onClick={() => handleRemove(product.id)} className='text-red-500 cursor-pointer hover:text-red-700'>
 								<TrashIcon className='w-6 h-6' />
 							</button>
