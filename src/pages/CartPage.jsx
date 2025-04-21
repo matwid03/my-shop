@@ -56,7 +56,7 @@ export function CartPage() {
 						))}
 					</ul>
 
-					<div className='w-full md:w-1/3 max-w-md border rounded-xl p-6 shadow-lg'>
+					<div className='w-full md:w-1/3 max-w-md border rounded-xl p-6 shadow-lg sticky top-12 self-start h-fit'>
 						<h2 className='text-xl font-bold mb-4'> Podsumowanie</h2>
 
 						<div className='flex justify-between text-lg'>

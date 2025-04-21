@@ -70,7 +70,7 @@ export function AuthPage() {
 	};
 
 	return (
-		<div className='flex items-start justify-center pt-12 min-h-screen bg-gray-100'>
+		<div className='flex items-start justify-center pt-12 h-full bg-gray-100'>
 			<div className='bg-white rounded-xl p-8 w-full max-w-md shadow-lg'>
 				<h1 className='text-2xl font-bold mb-12 text-center'>{isLogin ? 'Logowanie' : 'Rejestracja'}</h1>
 

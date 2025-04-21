@@ -17,27 +17,33 @@ function App() {
 	return (
 		<FiltersProvider>
 			<Navbar />
-			{isHomePage ? (
-				<>
-					<Categories />
-					<div className='flex'>
-						<FiltersSidebar className='w-1/4' products={products} />
-						<div className='w-3/4'>
-							<Routes>
-								<Route path='/' element={<HomePage />} />
-								<Route path='/:category' element={<HomePage />} />
-							</Routes>
+
+			<div className='h-[calc(100vh-132px)]'>
+				{isHomePage ? (
+					<>
+						<Categories />
+
+						<div className='flex h-full'>
+							<FiltersSidebar className='w-1/4' products={products} />
+							<div className='w-3/4 overflow-y-auto'>
+								<Routes>
+									<Route path='/' element={<HomePage />} />
+									<Route path='/:category' element={<HomePage />} />
+								</Routes>
+							</div>
 						</div>
+					</>
+				) : (
+					<div className='h-[calc(100vh-76px)] overflow-y-auto'>
+						<Routes>
+							<Route path='/auth' element={<AuthPage />} />
+							<Route path='/product/:id' element={<ProductPage />} />
+							<Route path='/cart' element={<CartPage />} />
+							<Route path='/favourites' element={<FavouritesPage />} />
+						</Routes>
 					</div>
-				</>
-			) : (
-				<Routes>
-					<Route path='/auth' element={<AuthPage />} />
-					<Route path='/product/:id' element={<ProductPage />} />
-					<Route path='/cart' element={<CartPage />} />
-					<Route path='/favourites' element={<FavouritesPage />} />
-				</Routes>
-			)}
+				)}
+			</div>
 		</FiltersProvider>
 	);
 }

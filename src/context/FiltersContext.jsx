@@ -6,7 +6,10 @@ const FiltersContext = createContext();
 export function FiltersProvider({ children }) {
 	const [selectedFilters, setSelectedFilters] = useState({
 		brands: [],
-		price: Math.max(...products.map((p) => p.price)),
+		priceRange: {
+			min: 0,
+			max: Math.max(...products.map((p) => p.price)),
+		},
 		searchQuery: '',
 	});
 
