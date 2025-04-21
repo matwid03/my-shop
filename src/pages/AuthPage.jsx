@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { FIREBASE_AUTH, FIRESTORE_DB } from '../firebase';
 import { doc, setDoc } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
+import { Toast } from '../components/Toast';
 
 export function AuthPage() {
 	const [isLogin, setIsLogin] = useState(true);
@@ -10,6 +11,8 @@ export function AuthPage() {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const [errorMessage, setErrorMessage] = useState('');
+	const [showToast, setShowToast] = useState(false);
+
 	const navigate = useNavigate();
 
 	const clearForm = () => {
@@ -53,7 +56,7 @@ export function AuthPage() {
 				clearForm();
 				setIsLogin(true);
 
-				alert('Konto zostało utworzone. Zaloguj się.');
+				setShowToast(true);
 			} catch (error) {
 				console.error(error);
 				if (error.code === 'auth/email-already-in-use') {
@@ -82,6 +85,8 @@ export function AuthPage() {
 					<button className='w-full p-2 bg-gray-200 rounded-lg  text-lg cursor-pointer hover:bg-gray-400'>{isLogin ? 'Zaloguj się' : 'Zarejestruj się'}</button>
 				</form>
 				{errorMessage && <p className='text-red-600 text-center'>{errorMessage}</p>}
+
+				{showToast && <Toast message={'Pomyślna rejestracja!'} onClose={() => setShowToast(false)} />}
 
 				<p className='mt-4 flex justify-center gap-2 text-lg'>
 					{isLogin ? 'Nie masz jeszcze konta?' : 'Masz już konto?'}

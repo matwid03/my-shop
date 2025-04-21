@@ -2,9 +2,12 @@ import { Link, useParams } from 'react-router-dom';
 import { products } from '../const/products';
 import { addToCart } from '../utils/cart';
 import { AuthProvider } from '../context/AuthContext';
+import { Toast } from '../components/Toast';
+import { useState } from 'react';
 
 export function ProductPage() {
 	const { user, setUser } = AuthProvider.useAuth();
+	const [showToast, setShowToast] = useState(false);
 	const { id } = useParams();
 	const product = products.find((p) => p.id === Number(id));
 
@@ -17,6 +20,7 @@ export function ProductPage() {
 		}
 
 		await addToCart(user.uid, product.id, setUser);
+		setShowToast(true);
 	};
 
 	if (!product) {
@@ -42,6 +46,9 @@ export function ProductPage() {
 					</div>
 				</div>
 			</div>
+
+			{showToast && <Toast message={'Dodano do koszyka!'} onClose={() => setShowToast(false)} />}
+
 			{similarProducts.length > 0 && (
 				<div>
 					<h2 className='text-2xl font-bold mb-6'>Podobne produkty</h2>

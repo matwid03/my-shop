@@ -3,10 +3,13 @@ import { AuthProvider } from '../context/AuthContext';
 import { useEffect, useState } from 'react';
 import { products } from '../const/products';
 import { removeFromCart } from '../utils/cart';
+import { Link } from 'react-router-dom';
+import { Toast } from '../components/Toast';
 
 export function CartPage() {
 	const { user, setUser } = AuthProvider.useAuth();
 	const [cartProducts, setCartProducts] = useState([]);
+	const [showToast, setShowToast] = useState(false);
 
 	useEffect(() => {
 		if (user) {
@@ -25,6 +28,7 @@ export function CartPage() {
 	const handleBtnClick = async (productId) => {
 		setCartProducts((prev) => prev.filter((product) => product.id !== productId));
 		await removeFromCart(user.uid, productId, setUser);
+		setShowToast(true);
 	};
 
 	if (!user) {
@@ -42,19 +46,22 @@ export function CartPage() {
 					<ul className='space-y-4 w-full md:w-2/3'>
 						{cartProducts.map((product) => (
 							<li key={product.id} className='flex items-center justify-between p-4 border rounded-xl shadow-md hover:shadow-lg transition'>
-								<div className='flex items-center gap-4 cursor-pointer'>
-									<img src={product.image} alt={product.name} className='w-20 h-20 object-contain' />
-									<div>
-										<h2 className='text-lg font-semibold'>{product.name}</h2>
-										<p className='text-gray-700'>{product.price.toFixed(2)} zł</p>
+								<Link to={`/product/${product.id}`}>
+									<div className='flex items-center gap-4 cursor-pointer'>
+										<img src={product.image} alt={product.name} className='w-20 h-20 object-contain' />
+										<div>
+											<h2 className='text-lg font-semibold'>{product.name}</h2>
+											<p className='text-gray-700'>{product.price.toFixed(2)} zł</p>
+										</div>
 									</div>
-								</div>
+								</Link>
 								<button className='text-red-500 cursor-pointer hover:text-red-700 transition' onClick={() => handleBtnClick(product.id)}>
 									<TrashIcon className='w-6 h-6' />
 								</button>
 							</li>
 						))}
 					</ul>
+					{showToast && <Toast message={'Usunięto z koszyka!'} onClose={() => setShowToast(false)} />}
 
 					<div className='w-full md:w-1/3 max-w-md border rounded-xl p-6 shadow-lg sticky top-12 self-start h-fit'>
 						<h2 className='text-xl font-bold mb-4'> Podsumowanie</h2>

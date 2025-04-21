@@ -36,7 +36,7 @@ export function Navbar() {
 			</Link>
 			<form className='flex gap-4'>
 				<input className='w-6xl border-2 border-gray-400 rounded-lg p-2 focus:border-black focus:outline-none transition duration-200' type='text' placeholder='Wyszukaj w sklepie...' onChange={(e) => updateSearchQuery(e.target.value)} value={selectedFilters.searchInput} />
-				<button type='submit' className='hover:cursor-pointer  hover:text-gray-950'>
+				<button className='hover:cursor-pointer hover:text-gray-950' onClick={(e) => e.preventDefault()}>
 					<MagnifyingGlassIcon className='w-10 h-10 ' />
 				</button>
 			</form>
