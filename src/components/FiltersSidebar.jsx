@@ -57,13 +57,23 @@ export function FiltersSidebar({ products }) {
 
 	return (
 		<aside className='w-1/4 p-4 bg-gray-100'>
-			<h2 className='text-lg font-bold mb-2'>Marka</h2>
-			{brands.map((brand) => (
-				<label key={brand} className='flex gap-2'>
-					<input type='checkbox' value={brand} onChange={() => handleFilterChange(brand)} checked={selectedFilters.brands.includes(brand)} />
-					{brand}
-				</label>
-			))}
+			<h2 className='text-lg font-bold mb-4'>Marka</h2>
+			<div className='grid grid-cols-2 gap-2'>
+				{brands.map((brand) => {
+					const isChecked = selectedFilters.brands.includes(brand);
+					return (
+						<label
+							key={brand}
+							className={`cursor-pointer w-36 text-center px-4 py-2 rounded-full border transition
+						${isChecked ? 'bg-black text-white border-black' : 'bg-white text-gray-800 border-gray-300 hover:border-black'}
+					`}
+							aria-checked={isChecked}>
+							<input type='checkbox' value={brand} checked={isChecked} onChange={() => handleFilterChange(brand)} className='hidden' />
+							{brand}
+						</label>
+					);
+				})}
+			</div>
 
 			<div className='mt-6'>
 				<h2 className='text-lg font-bold mb-2'>Cena (zł)</h2>
