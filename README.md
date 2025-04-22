@@ -1,12 +1,60 @@
-# React + Vite
+# 🖥️ E-Commerce Web App – Computer Accessories Store
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A responsive **e-commerce web application** focused on computer accessories. This app includes the essential features of a real online shop — from browsing and filtering products to managing favorites and a shopping cart.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Features
 
-## Expanding the ESLint configuration
+### 🔐 **User Authentication**
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+-   Users can **register** and **log in** securely using **Firebase Authentication**.
+-   Session handling allows users to stay logged in across visits.
+
+### 🧭 **Navigation**
+
+-   A **navbar** includes:
+    -   Link to the **homepage**
+    -   **Search bar** for finding products
+    -   **Profile icon** for login/logout
+    -   **Heart icon** to access favorite items
+    -   **Cart icon** to view items in the cart
+
+### 🛍️ **Homepage**
+
+-   Displays **products filtered** by:
+    -   **Category**
+    -   **Brand**
+    -   **Price range**
+-   Users can easily browse, filter, and discover relevant products.
+
+### 💖 **Favorites Page**
+
+-   View and manage your **favorite items**.
+-   Add or remove products from your favorites list with a single click.
+-   Favorites are stored in **Firestore** for persistent access.
+
+### 🛒 **Shopping Cart Page**
+
+-   See all items added to the **shopping cart**.
+-   Modify quantities or remove items directly.
+-   Cart data is saved in **Firestore** and tied to the user’s account.
+
+### 📄 **Product Details Page**
+
+-   View detailed product information.
+-   **Add item to cart** directly from the product page.
+-   See a list of **similar products** based on the selected item.
+
+---
+
+## 🛠️ Technologies Used
+
+-   ⚛️ **React**
+-   📜 **JavaScript (ES6+)**
+-   🎨 **CSS / Tailwind CSS**
+-   🔥 **Firebase**:
+    -   **Authentication** (for user login/register)
+    -   **Firestore** (for storing user data like cart/favorites)
+
+---
