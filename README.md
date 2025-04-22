@@ -58,3 +58,7 @@ A responsive **e-commerce web application** focused on computer accessories. Thi
     -   **Firestore** (for storing user data like cart/favorites)
 
 ---
+
+## **Screenshots**
+
+<img src="screenshots/s1.png" width="600"/><img src="screenshots/s2.png" width="600"/><img src="screenshots/s3.png" width="600"/><img src="screenshots/s4.png" width="600"/><img src="screenshots/s7.png" width="600"/><img src="screenshots/s8.png" width="600"/><img src="screenshots/s9.png" width="600"/><img src="screenshots/s5.png" width="600"/><img src="screenshots/s6.png" width="600"/>
