@@ -30,11 +30,11 @@ export function Navbar() {
 	}, [user]);
 
 	return (
-		<nav className='flex justify-between items-center bg-gray-200 p-4 text-gray-600 '>
+		<nav className='flex flex-col md:flex-row justify-center xl:justify-between items-center bg-gray-200 p-4 text-gray-600 '>
 			<Link to='/'>
 				<p className='text-4xl font-bold hover:text-gray-950'>My shop</p>
 			</Link>
-			<form className='flex gap-4'>
+			<form className='hidden xl:flex gap-4 w-1/2'>
 				<input className='w-6xl border-2 border-gray-400 rounded-lg p-2 focus:border-black focus:outline-none transition duration-200' type='text' placeholder='Wyszukaj w sklepie...' onChange={(e) => updateSearchQuery(e.target.value)} value={selectedFilters.searchInput} />
 				<button className='hover:cursor-pointer hover:text-gray-950' onClick={(e) => e.preventDefault()}>
 					<MagnifyingGlassIcon className='w-10 h-10 ' />

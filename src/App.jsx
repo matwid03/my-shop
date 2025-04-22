@@ -23,9 +23,9 @@ function App() {
 					<>
 						<Categories />
 
-						<div className='flex h-full'>
-							<FiltersSidebar className='w-1/4' products={products} />
-							<div className='w-3/4 overflow-y-auto'>
+						<div className='flex h-full flex-col md:flex-row'>
+							<FiltersSidebar className='md:w-1/4' products={products} />
+							<div className='md:w-3/4 overflow-y-auto'>
 								<Routes>
 									<Route path='/' element={<HomePage />} />
 									<Route path='/:category' element={<HomePage />} />
