@@ -1,6 +1,6 @@
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { FIRESTORE_DB } from "../firebase";
-
+///restr
 export async function updateCart(userId, productId, setUser, action, newQuantity = 1) {
   const userRef = doc(FIRESTORE_DB, 'users', userId);
   const userSnap = await getDoc(userRef);
