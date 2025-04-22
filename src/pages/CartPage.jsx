@@ -2,7 +2,7 @@ import { TrashIcon } from '@heroicons/react/24/outline';
 import { AuthProvider } from '../context/AuthContext';
 import { useEffect, useState } from 'react';
 import { products } from '../const/products';
-import { removeFromCart } from '../utils/cart';
+import { updateCart } from '../utils/cart';
 import { Link } from 'react-router-dom';
 import { Toast } from '../components/Toast';
 
@@ -13,21 +13,33 @@ export function CartPage() {
 
 	useEffect(() => {
 		if (user) {
-			const productIds = user?.cart || [];
-			const items = products.filter((product) => productIds.includes(product.id));
+			const cartItems = user.cart || [];
+
+			const items = cartItems
+				.map((cartItem) => {
+					const product = products.find((p) => p.id === cartItem.id);
+					if (!product) return null;
+					return { ...product, quantity: cartItem.quantity };
+				})
+				.filter(Boolean);
+
 			setCartProducts(items);
 		}
 	}, [user]);
 
-	const productsPrice = cartProducts.reduce((total, product) => total + product.price, 0);
+	const productsPrice = cartProducts.reduce((total, product) => total + product.price * product.quantity, 0);
 	const deliveryCost = 59;
 	const minSumForFreeDelivery = 1000;
 	const isFreeDelivery = productsPrice >= minSumForFreeDelivery;
 	const totalPrice = isFreeDelivery ? productsPrice : productsPrice + deliveryCost;
 
+	const updateQuantity = async (productId, newQuantity) => {
+		await updateCart(user.uid, productId, setUser, 'update', newQuantity);
+	};
+
 	const handleBtnClick = async (productId) => {
 		setCartProducts((prev) => prev.filter((product) => product.id !== productId));
-		await removeFromCart(user.uid, productId, setUser);
+		await updateCart(user.uid, productId, setUser, 'remove');
 		setShowToast(true);
 	};
 
@@ -55,9 +67,19 @@ export function CartPage() {
 										</div>
 									</div>
 								</Link>
-								<button className='text-red-500 cursor-pointer hover:text-red-700 transition' onClick={() => handleBtnClick(product.id)}>
-									<TrashIcon className='w-6 h-6' />
-								</button>
+								<div className='flex items-center gap-4'>
+									<h3>Ilość:</h3>
+									<button className='px-2 py-1 bg-gray-200 rounded hover:bg-gray-300' onClick={() => updateQuantity(product.id, product.quantity - 1)}>
+										-
+									</button>
+									<span>{product.quantity}</span>
+									<button className='px-2 py-1 bg-gray-200 rounded hover:bg-gray-300' onClick={() => updateQuantity(product.id, product.quantity + 1)}>
+										+
+									</button>
+									<button className='text-red-500 cursor-pointer hover:text-red-700 transition' onClick={() => handleBtnClick(product.id)}>
+										<TrashIcon className='w-6 h-6' />
+									</button>
+								</div>
 							</li>
 						))}
 					</ul>

@@ -1,6 +1,6 @@
 import { Link, useParams } from 'react-router-dom';
 import { products } from '../const/products';
-import { addToCart } from '../utils/cart';
+import { updateCart } from '../utils/cart';
 import { AuthProvider } from '../context/AuthContext';
 import { Toast } from '../components/Toast';
 import { useState } from 'react';
@@ -19,7 +19,7 @@ export function ProductPage() {
 			return;
 		}
 
-		await addToCart(user.uid, product.id, setUser);
+		await updateCart(user.uid, product.id, setUser, 'add');
 		setShowToast(true);
 	};
 
