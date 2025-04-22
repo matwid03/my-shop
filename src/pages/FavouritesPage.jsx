@@ -1,13 +1,15 @@
 import { TrashIcon } from '@heroicons/react/24/outline';
 import { products } from '../const/products';
-import { removeFromFavourites } from '../utils/favourites';
+import { updateFavourites } from '../utils/favourites';
 import { useEffect, useState } from 'react';
 import { AuthProvider } from '../context/AuthContext';
 import { Link } from 'react-router-dom';
+import { Toast } from '../components/Toast';
 
 export function FavouritesPage() {
 	const { user, setUser, isLoading } = AuthProvider.useAuth();
 	const [favouriteProducts, setFavouriteProducts] = useState([]);
+	const [showToast, setShowToast] = useState(false);
 
 	useEffect(() => {
 		if (user) {
@@ -19,7 +21,9 @@ export function FavouritesPage() {
 
 	const handleRemove = async (productId) => {
 		setFavouriteProducts((prev) => prev.filter((product) => product.id !== productId));
-		await removeFromFavourites(user.uid, productId, setUser);
+		setShowToast(true);
+
+		await updateFavourites(user.uid, productId, 'remove', setUser);
 	};
 
 	if (isLoading) {
@@ -47,6 +51,8 @@ export function FavouritesPage() {
 									</div>
 								</div>
 							</Link>
+
+							{showToast && <Toast message={'Usunięto z ulubionych!'} onClose={() => setShowToast(false)} />}
 
 							<button onClick={() => handleRemove(product.id)} className='text-red-500 cursor-pointer hover:text-red-700'>
 								<TrashIcon className='w-6 h-6' />

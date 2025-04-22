@@ -1,7 +1,7 @@
 import { HeartIcon as OutlineHeartIcon } from '@heroicons/react/24/outline';
 import { HeartIcon as SolidHeartIcon } from '@heroicons/react/24/solid';
 import { useEffect, useRef, useState } from 'react';
-import { toggleFavourite } from '../utils/favourites';
+import { updateFavourites } from '../utils/favourites';
 import { AuthProvider } from '../context/AuthContext';
 import { Link } from 'react-router-dom';
 import { Toast } from './Toast';
@@ -38,7 +38,7 @@ export function Product({ product }) {
 			setShowToast(false);
 		}, 2500);
 
-		await toggleFavourite(user.uid, product.id, isFavourite, setUser);
+		await updateFavourites(user.uid, product.id, isFavourite ? 'remove' : 'add', setUser);
 	};
 
 	return (

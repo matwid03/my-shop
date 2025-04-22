@@ -39,8 +39,9 @@ export function CartPage() {
 
 	const handleBtnClick = async (productId) => {
 		setCartProducts((prev) => prev.filter((product) => product.id !== productId));
-		await updateCart(user.uid, productId, setUser, 'remove');
 		setShowToast(true);
+
+		await updateCart(user.uid, productId, setUser, 'remove');
 	};
 
 	if (!user) {

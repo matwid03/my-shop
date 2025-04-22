@@ -1,6 +1,6 @@
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { FIRESTORE_DB } from "../firebase";
-///restr
+
 export async function updateCart(userId, productId, setUser, action, newQuantity = 1) {
   const userRef = doc(FIRESTORE_DB, 'users', userId);
   const userSnap = await getDoc(userRef);
@@ -25,7 +25,7 @@ export async function updateCart(userId, productId, setUser, action, newQuantity
       break;
 
     case 'update': {
-      updatedCart = currentCart
+      updatedCart = updatedCart
         .map(item => {
           if (item.id === productId) {
             return newQuantity > 0 ? { ...item, quantity: newQuantity } : null;
@@ -33,7 +33,11 @@ export async function updateCart(userId, productId, setUser, action, newQuantity
           return item;
         })
         .filter(Boolean);
+      break;
     }
+    default:
+      console.warn(`Nieznana akcja koszyka: ${action}`);
+      return;
   }
 
   await updateDoc(userRef, { cart: updatedCart });
