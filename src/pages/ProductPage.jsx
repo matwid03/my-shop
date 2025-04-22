@@ -15,7 +15,7 @@ export function ProductPage() {
 
 	const handleBtnClick = async () => {
 		if (!user) {
-			alert('Zaloguj się, aby dodać do ulubionych!');
+			alert('Zaloguj się, aby dodać do koszyka!');
 			return;
 		}
 

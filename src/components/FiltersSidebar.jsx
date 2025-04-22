@@ -56,7 +56,7 @@ export function FiltersSidebar({ products }) {
 	};
 
 	return (
-		<aside className='w-full md:w-1/2 xl:w-1/4 p-4 bg-gray-100'>
+		<aside className=' w-full md:w-1/2 xl:w-1/4 p-4 bg-gray-100'>
 			<h2 className='text-lg font-bold mb-4'>Marka</h2>
 			<div className='grid grid-cols-2 gap-2 '>
 				{brands.map((brand) => {

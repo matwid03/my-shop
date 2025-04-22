@@ -18,7 +18,7 @@ function App() {
 		<FiltersProvider>
 			<Navbar />
 
-			<div className='h-dvh md:h-[calc(100vh-132px)]'>
+			<div className='h-[calc(100vh+76px)] md:h-[calc(100vh-132px)]'>
 				{isHomePage ? (
 					<>
 						<Categories />
