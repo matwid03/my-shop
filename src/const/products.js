@@ -5,7 +5,7 @@ export const products = [
     "category": "mice",
     "brand": "Logitech",
     "price": 399.99,
-    "image": "/mouse1.jpg"
+    "image": "images/mouse1.jpg"
   },
   {
     "id": 2,
@@ -13,7 +13,7 @@ export const products = [
     "category": "mice",
     "brand": "Razer",
     "price": 249.99,
-    "image": "/mouse2.jpg"
+    "image": "images/mouse2.jpg"
   },
   {
     "id": 3,
@@ -21,7 +21,7 @@ export const products = [
     "category": "mice",
     "brand": "SteelSeries",
     "price": 179.99,
-    "image": "/mouse3.jpg"
+    "image": "images/mouse3.jpg"
   },
   {
     "id": 4,
@@ -29,7 +29,7 @@ export const products = [
     "category": "mice",
     "brand": "Corsair",
     "price": 349.99,
-    "image": "/mouse4.jpg"
+    "image": "images/mouse4.jpg"
   },
   {
     "id": 5,
@@ -37,7 +37,7 @@ export const products = [
     "category": "mice",
     "brand": "Logitech",
     "price": 499.99,
-    "image": "/mouse5.jpg"
+    "image": "images/mouse5.jpg"
   },
   {
     "id": 6,
@@ -45,7 +45,7 @@ export const products = [
     "category": "keyboards",
     "brand": "Razer",
     "price": 599.99,
-    "image": "/keyboard1.jpg"
+    "image": "images/keyboard1.jpg"
   },
   {
     "id": 7,
@@ -53,7 +53,7 @@ export const products = [
     "category": "keyboards",
     "brand": "SteelSeries",
     "price": 899.99,
-    "image": "/keyboard2.jpg"
+    "image": "images/keyboard2.jpg"
   },
   {
     "id": 8,
@@ -61,7 +61,7 @@ export const products = [
     "category": "keyboards",
     "brand": "Corsair",
     "price": 799.99,
-    "image": "/keyboard3.jpg"
+    "image": "images/keyboard3.jpg"
   },
   {
     "id": 9,
@@ -69,7 +69,7 @@ export const products = [
     "category": "keyboards",
     "brand": "Logitech",
     "price": 899.99,
-    "image": "/keyboard4.jpg"
+    "image": "images/keyboard4.jpg"
   },
   {
     "id": 10,
@@ -77,7 +77,7 @@ export const products = [
     "category": "keyboards",
     "brand": "HyperX",
     "price": 649.99,
-    "image": "/keyboard5.jpg"
+    "image": "images/keyboard5.jpg"
   },
   {
     "id": 11,
@@ -85,7 +85,7 @@ export const products = [
     "category": "headphones",
     "brand": "Razer",
     "price": 199.99,
-    "image": "/headphones1.jpg"
+    "image": "images/headphones1.jpg"
   },
   {
     "id": 12,
@@ -93,7 +93,7 @@ export const products = [
     "category": "headphones",
     "brand": "SteelSeries",
     "price": 599.99,
-    "image": "/headphones2.jpg"
+    "image": "images/headphones2.jpg"
   },
   {
     "id": 13,
@@ -101,7 +101,7 @@ export const products = [
     "category": "headphones",
     "brand": "Corsair",
     "price": 399.99,
-    "image": "/headphones3.jpg"
+    "image": "images/headphones3.jpg"
   },
   {
     "id": 14,
@@ -109,7 +109,7 @@ export const products = [
     "category": "headphones",
     "brand": "HyperX",
     "price": 449.99,
-    "image": "/headphones4.jpg"
+    "image": "images/headphones4.jpg"
   },
   {
     "id": 15,
@@ -117,7 +117,7 @@ export const products = [
     "category": "headphones",
     "brand": "Logitech",
     "price": 799.99,
-    "image": "/headphones5.jpg"
+    "image": "images/headphones5.jpg"
   },
   {
     "id": 16,
@@ -125,7 +125,7 @@ export const products = [
     "category": "laptops",
     "brand": "Dell",
     "price": 7499.99,
-    "image": "/laptop1.jpg"
+    "image": "images/laptop1.jpg"
   },
   {
     "id": 17,
@@ -133,7 +133,7 @@ export const products = [
     "category": "laptops",
     "brand": "Apple",
     "price": 9999.99,
-    "image": "/laptop2.jpg"
+    "image": "images/laptop2.jpg"
   },
   {
     "id": 18,
@@ -141,7 +141,7 @@ export const products = [
     "category": "laptops",
     "brand": "Asus",
     "price": 7299.99,
-    "image": "/laptop3.jpg"
+    "image": "images/laptop3.jpg"
   },
   {
     "id": 19,
@@ -149,7 +149,7 @@ export const products = [
     "category": "laptops",
     "brand": "Lenovo",
     "price": 5999.99,
-    "image": "/laptop4.jpg"
+    "image": "images/laptop4.jpg"
   },
   {
     "id": 20,
@@ -157,6 +157,6 @@ export const products = [
     "category": "laptops",
     "brand": "HP",
     "price": 6799.99,
-    "image": "/laptop5.jpg"
+    "image": "images/laptop5.jpg"
   }
 ];

@@ -61,7 +61,7 @@ export function CartPage() {
 							<li key={product.id} className='flex items-center justify-between p-4 border rounded-xl shadow-md hover:shadow-lg transition'>
 								<Link to={`/product/${product.id}`}>
 									<div className='flex items-center gap-4 cursor-pointer'>
-										<img src={product.image} alt={product.name} className='w-20 h-20 object-contain' />
+										<img src={`/${product.image}`} alt={product.name} className='w-20 h-20 object-contain' />
 										<div>
 											<h2 className='text-lg font-semibold'>{product.name}</h2>
 											<p className='text-gray-700'>{product.price.toFixed(2)} zł</p>

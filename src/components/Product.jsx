@@ -54,7 +54,7 @@ export function Product({ product }) {
 					{showToast.visible && <Toast message={showToast.action === 'added' ? 'Dodano do ulubionych!' : 'Usunięto z ulubionych!'} onClose={() => setShowToast({ visible: false, action: showToast.action })} />}
 					{isFavourite ? <SolidHeartIcon className='w-8 h-8 text-red-500 hover:scale-110 transition' /> : <OutlineHeartIcon className='w-8 h-8 text-gray-400 hover:text-red-500 hover:scale-110 transition' />}
 				</div>
-				<img src={`${product.image}`} alt={product.name} className='w-full h-60 object-contain ' />
+				<img src={`/${product.image}`} alt={product.name} className='w-full h-60 object-contain ' />
 				<h2 className='text-lg font-bold'>{product.name}</h2>
 				<p className='text-gray-700'>{product.price} zł</p>
 			</div>
